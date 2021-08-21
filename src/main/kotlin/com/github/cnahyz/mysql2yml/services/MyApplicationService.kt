@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.cnahyz.mysql2yml.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.cnahyz.mysql2yml.MyBundle
 
 class MyApplicationService {
 
