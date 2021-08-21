@@ -1,13 +1,14 @@
 package com.github.cnahyz.mysql2yml
 
 import com.intellij.AbstractBundle
+import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
 import org.jetbrains.annotations.PropertyKey
 
 @NonNls
 private const val BUNDLE = "messages.MyBundle"
 
-object MyBundle : AbstractBundle(BUNDLE) {
+object MyBundle : DynamicBundle(BUNDLE) {
 
     @Suppress("SpreadOperator")
     @JvmStatic
