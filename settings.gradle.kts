@@ -1,1 +1,1 @@
-rootProject.name = "mysql2yml"
+rootProject.name = "IntelliJ Platform Plugin Template"
