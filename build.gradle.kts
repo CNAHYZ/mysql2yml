@@ -14,11 +14,20 @@ plugins {
     id("org.jetbrains.changelog") version "1.2.1"
 }
 
+dependencies {
+    implementation("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
+    // https://mvnrepository.com/artifact/org.yaml/snakeyaml
+    implementation("org.yaml:snakeyaml:1.29")
+}
+
 group = properties("pluginGroup")
 version = properties("pluginVersion")
 
 // Configure project's dependencies
 repositories {
+    maven { setUrl("https://maven.aliyun.com/nexus/content/groups/public/") }
+    maven { setUrl("https://maven.aliyun.com/nexus/content/repositories/jcenter") }
     mavenCentral()
 }
 
@@ -107,4 +116,8 @@ tasks {
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
     }
+}
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
 }

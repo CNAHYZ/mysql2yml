@@ -6,14 +6,33 @@
     <!-- Product and plugin compatibility requirements -->
     <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <!--必须依赖Database Tool插件-->
+    <depends>com.intellij.database</depends>
 
+    <!--扩展点-->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.cnahyz.mysql2yml.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.cnahyz.mysql2yml.services.MyProjectService"/>
+        <!-- Add your extensions here -->
+        <!--实例化配置信息服务-->
+        <applicationService
+                serviceImplementation="com.github.cnahyz.mysql2yml.service.impl.SettingsStorageServiceImpl"/>
+        <!--项目服务-->
+        <projectService serviceImplementation="com.github.cnahyz.mysql2yml.service.impl.TableInfoSettingsServiceImpl"/>
+        <projectService serviceInterface="com.github.cnahyz.mysql2yml.service.CodeGenerateService"
+                        serviceImplementation="com.github.cnahyz.mysql2yml.service.impl.CodeGenerateServiceImpl"/>
+        <!--系统设置面板-->
+        <applicationConfigurable dynamic="true" instance="com.github.cnahyz.mysql2yml.ui.MainSettingForm"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.cnahyz.mysql2yml.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+    <!--    <applicationListeners>-->
+    <!--        <listener class="com.github.cnahyz.mysql2yml.listeners.MyProjectManagerListener"-->
+    <!--                  topic="com.intellij.openapi.project.ProjectManagerListener"/>-->
+    <!--    </applicationListeners>-->
+    <actions>
+        <!-- Add your actions here -->
+        <group id="mainActionGroup" class="com.github.cnahyz.mysql2yml.action.MainActionGroup"
+               text="Mysql2yml" popup="true">
+            <!--生成代码菜单,将其加入idea内置的右击数据表的菜单组中-->
+            <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
+        </group>
+    </actions>
 </idea-plugin>
